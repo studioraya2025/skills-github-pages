@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadual Tempahan Shoot Raya 2025</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; }
+        .container { max-width: 1200px; margin: auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h2 { color: #d9534f; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid black; padding: 10px; text-align: center; }
+        th { background-color: #f8d7da; }
+        input, select { width: 100%; padding: 5px; }
+        button { margin-top: 20px; padding: 10px 20px; background-color: #5cb85c; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Jadual Tempahan Shoot Raya 2025</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tarikh</th>
+                    <th>Masa</th>
+                    <th>Nama</th>
+                    <th>No Telefon</th>
+                    <th>Pakej</th>
+                    <th>Deposit (RM)</th>
+                    <th>Baki (RM)</th>
+                    <th>Frame & Saiz</th>
+                </tr>
+            </thead>
+            <tbody id="bookingTable">
+                <!-- Data akan diisi di sini -->
+            </tbody>
+        </table>
+        <button onclick="submitBooking()">Hantar Tempahan</button>
+    </div>
+
+    <script>
+        function generateBookingSlots() {
+            let startDate = new Date("2025-03-01");
+            let endDate = new Date("2025-04-04");
+            let startTime = 9;
+            let endTime = 23;
+            let tableBody = document.getElementById("bookingTable");
+            
+            while (startDate <= endDate) {
+                for (let hour = startTime; hour < endTime; hour++) {
+                    for (let min = 0; min < 60; min += 30) {
+                        let row = document.createElement("tr");
+                        row.innerHTML = `
+                            <td>${startDate.toISOString().split('T')[0]}</td>
+                            <td>${hour}:${min === 0 ? '00' : '30'}</td>
+                            <td><input type="text" placeholder="Nama"></td>
+                            <td><input type="text" placeholder="No Telefon"></td>
+                            <td>
+                                <select>
+                                    <option value="A">Pakej A</option>
+                                    <option value="B">Pakej B</option>
+                                    <option value="C">Pakej C</option>
+                                </select>
+                            </td>
+                            <td><input type="text" placeholder="Deposit"></td>
+                            <td><input type="text" placeholder="Baki"></td>
+                            <td><input type="text" placeholder="Frame & Saiz"></td>
+                        `;
+                        tableBody.appendChild(row);
+                    }
+                }
+                startDate.setDate(startDate.getDate() + 1);
+            }
+        }
+
+        function submitBooking() {
+            alert("Tempahan berjaya dihantar!");
+        }
+
+        window.onload = generateBookingSlots;
+    </script>
+</body>
+</html>
